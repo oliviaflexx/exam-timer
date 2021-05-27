@@ -1,14 +1,12 @@
 import os
 
 from flask import Flask, flash, redirect, render_template, request, session
-from tempfile import mkdtemp
 
 # Configure application
 app = Flask(__name__)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-
 
 # Ensure responses aren't cached
 @app.after_request
@@ -25,23 +23,15 @@ def index():
         length = request.form.get("length")
         mc_count = request.form.get("mc_count")
         typet = request.form.get("typet")
-        
-        if not length or length == '0':
+
+        replace_length = length.replace(".", "1", 1)
+
+        if not length or replace_length.isdigit() is False:
             sorry = "You didn't enter an exam length"
             return render_template("sorry.html", sorry=sorry)
             
-        x = length.isnumeric()
-        if x == False:
+        if not mc_count or mc_count.isdigit() is False:
             sorry = "You didn't enter a number"
-            return render_template("sorry.html", sorry=sorry)
-            
-        y = mc_count.isnumeric()
-        if y == False:
-            sorry = "You didn't enter a number"
-            return render_template("sorry.html", sorry=sorry)
-            
-        if not mc_count or mc_count == '0':
-            sorry = "You didn't enter an amount of questions"
             return render_template("sorry.html", sorry=sorry)
             
         if (typet == 'manual'):

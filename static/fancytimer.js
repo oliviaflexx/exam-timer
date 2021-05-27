@@ -49,12 +49,14 @@ function clicky(endtime) {
   mc_count = mc_count - 1;
   if (mc_count <= 0) {
     document.getElementById('question').innerHTML = "All questions finished!";
+    document.getElementById('left').innerHTML = "0 questions left"
     return;
   }
   // update counter
   counter = counter + 1;
   // update question number with counter
   document.getElementById('question').innerHTML = "Question #" + counter;
+  document.getElementById('left').innerHTML = mc_count + " question(s) left";
   // find out how much time left there is for the exam
   cdeadline0 = getTimeRemaining(endtime);
   //find out how much time there is per question
@@ -138,6 +140,7 @@ var z = 1;
 var mc_count0 = document.getElementById('mc_count');
 var mc_count = Number(mc_count0.innerHTML) + 1;
 var counter = 0;
+var left = mc_count;
 
 const progressBarOverall = document.getElementById('overall-bar');
 const progressBarQuestion = document.getElementById('question-bar');
@@ -151,4 +154,5 @@ document.getElementById('start').addEventListener('click', function () {
   document.getElementById('start').style.visibility = "hidden";
   document.getElementById('next').style.visibility = "visible";
 });
+
 

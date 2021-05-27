@@ -12,14 +12,18 @@
             <label for "mc_count">Amount of questions</label>
             <br>
             <input class="form-control" name="mc_count" type="text">
-            <small id="example" class="form-text text-muted">Ex: Enter 30 if there are 30 multiple choice questions or 0 if there are none</small>
+            <small id="example" class="form-text text-muted">Ex: Enter 30 if there are 30 questions</small>
         </div>
         <div class="form-group">
             <input class="form-check-input" type="radio" name="typet" value="automatic">
             <label class="form-check-label" for="typet">Automatic</label> <br>
+            <small id="example" class="form-text text-muted">Select Automatic if you don't want to press next after each question</small>
+            <br>
             <input class="form-check-input" type="radio" name="typet" value="manual">
             <label class="form-check-label" for="typet">Manual</label>
+            <small id="example" class="form-text text-muted">Select Manual if you want a timer with the per question time adjusted for your actual performance</small>
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 {% endblock %}
+

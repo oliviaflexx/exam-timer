@@ -35,6 +35,7 @@ function initializeClock(id, endtime) {
     
     if (t.ototal <= 0) {
       clearInterval(timeinterval);
+      stopit = 1;
     }
   }
   updateClock();
@@ -55,7 +56,8 @@ function initializeClockp(id, endtime, pendtime) {
   const psecondsSpan = clock.querySelector('.pseconds');
   var treset = 1;
   document.getElementById('question').innerHTML = "Question #" + up;
-  
+  document.getElementById('left').innerHTML = left + " question(s) left";
+
   function updateClockp() {
     const t = getTimeRemaining(pendtime);
     const ot = getTimeRemaining(endtime);
@@ -71,11 +73,11 @@ function initializeClockp(id, endtime, pendtime) {
     if (t.ototal <= 0) {
       clearInterval(timeintervalp);
       treset = 0;
-    }
-    
-    if (ot.ototal <= 0) {
-      clearInterval(timeintervalp);
-      document.getElementById('question').innerHTML = "Exam is over";
+      if (stopit == 1) {
+        document.getElementById('question').innerHTML = "Exam is over";
+        document.getElementById('left').innerHTML = "0 questions left";
+        treset = 1;
+      }
     }
     
     if (treset == 0) {
@@ -83,6 +85,8 @@ function initializeClockp(id, endtime, pendtime) {
       initializeClockp('pclockdiv', endtime, qdeadline);
       up = up + 1;
       document.getElementById('question').innerHTML = "Question # " + up;
+      left = mc_count - up + 1;
+      document.getElementById('left').innerHTML = left + " question(s) left";
       treset = 1;
     }
   }
@@ -96,6 +100,8 @@ var length = Number(length0.innerHTML);
 var mc_count0 = document.getElementById('mc_count');
 var mc_count = Number(mc_count0.innerHTML);
 var up = 1;
+var left = mc_count;
+var stopit = 0;
 const progressBarOverall = document.getElementById('overall-bar');
 const progressBarQuestion = document.getElementById('question-bar');
 
